@@ -45,19 +45,14 @@ first — never the comparison.
 
 **Live:** https://joengineer656.github.io/wheel-legged-balancing-robot/
 
-- `index.html` — the project summary (one page, what and why)
-- `brief.html` — the one-page project brief
-- `docs/project-documentation.md` — full technical specification
-- `docs/AGENTS.md` — engineering rules for the build (safety cutoffs, architecture, testing protocol)
+`index.html` — the project summary (one page, what and why). The full technical documentation and the
+build rules are kept locally and are not published here.
 
 ## Repo layout
 
 ```
-index.html                        summary page (GitHub Pages root)
-brief.html                        one-page brief
-assets/                           university logo
-docs/project-documentation.md     full technical documentation
-docs/AGENTS.md                    build rules: safety, architecture, testing
+index.html      summary page (GitHub Pages root)
+assets/         university logo
 ```
 
 ## Safety (non-negotiable)
