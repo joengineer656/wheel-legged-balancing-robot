@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wheel-Legged Balancing Robot — project one-pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFAF8; --ink:#1C1C1A; --muted:#6B6B64; --line:#D9D7CF;
+  --zebra:#F2F1ED; --green:#1F6B47; --green-soft:#EAF2EC; --copper:#9A5F28;
+  --slab:#181714; --slab-ink:#EAE7DF; --slab-green:#8CD3AC;
+  --mono:'IBM Plex Mono',ui-monospace,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    repeating-linear-gradient(0deg,transparent 0 31px,rgba(28,28,26,.05) 31px 32px),
+    repeating-linear-gradient(90deg,transparent 0 31px,rgba(28,28,26,.05) 31px 32px),
+    var(--paper);
+  color:var(--ink);
+  font-family:'Newsreader',Georgia,serif;
+  font-size:16px; line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+main{max-width:1080px;margin:0 auto;padding:64px 28px 90px}
+p{max-width:68ch}
+a{color:var(--green)}
+::selection{background:var(--green);color:#fff}
+:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+.ghost{position:fixed;font:500 12px/1 var(--mono);color:rgba(28,28,26,.34)}
+.ghost.tl{top:14px;left:14px}
+.ghost.br{bottom:14px;right:14px}
+
+header.hero{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:start;margin-bottom:96px}
+.kicker{font:500 12px/1 var(--mono);color:var(--muted);margin-bottom:26px;letter-spacing:.02em}
+h1{
+  font-family:'Archivo',sans-serif;font-weight:850;font-size:clamp(40px,6.4vw,68px);
+  line-height:.98;letter-spacing:-.032em;text-transform:none;margin-bottom:6px;
+}
+.byline{font:400 13px/1.6 var(--mono);color:var(--muted);margin:18px 0 30px}
+.lead{font-size:19.5px}
+.lead strong{font-weight:600;color:var(--green-ink,#124631)}
+
+.titleblock{border:1.5px solid var(--ink);font:400 12px/1.5 var(--mono)}
+.titleblock .row{display:grid;grid-template-columns:96px 1fr;border-top:1px solid var(--line)}
+.titleblock .row:first-child{border-top:0}
+.titleblock dt{padding:8px 10px;border-right:1px solid var(--line);color:var(--muted)}
+.titleblock dd{padding:8px 10px;font-weight:500}
+.titleblock .fill{font-style:italic;color:var(--muted)}
+.headline{padding:10px;background:var(--ink);color:var(--paper)}
+.headline b{color:var(--slab-green);font-weight:500}
+
+section{margin-bottom:96px}
+h2{
+  display:flex;align-items:baseline;gap:14px;
+  border-top:1.5px solid var(--ink);padding-top:14px;margin-bottom:28px;
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:25px;letter-spacing:-.02em;
+}
+h2 .no{font:500 13px/1 var(--mono);color:var(--green)}
+section>p.intro{margin-bottom:28px}
+
+/* requirement ladder */
+.ladder{border:1px solid var(--line);max-width:820px}
+.ladder>div{display:grid;grid-template-columns:110px 1fr 230px;gap:16px;padding:14px 18px;border-top:1px solid var(--line);align-items:baseline}
+.ladder>div:first-child{border-top:0}
+.ladder .lvl{font:500 12px/1.5 var(--mono);color:var(--muted)}
+.ladder .lvl b{display:block;color:var(--ink);font-size:13px}
+.ladder .gate{font:400 11.5px/1.5 var(--mono);color:var(--green)}
+.ladder .gate::before{content:"gate: ";color:var(--muted)}
+
+/* diagram */
+.diagram{border:1.5px solid var(--ink);background:var(--paper);overflow-x:auto}
+.diagram svg{display:block;min-width:760px;width:100%}
+.diagramfoot{display:flex;justify-content:space-between;font:400 11px/1.6 var(--mono);color:var(--muted);padding:10px 2px 0;flex-wrap:wrap;gap:8px}
+.layercap{display:flex;justify-content:space-between;font:400 12px/1.4 var(--mono);color:var(--muted);margin-bottom:12px;flex-wrap:wrap;gap:6px}
+.layercap .l1{color:var(--green);font-weight:500}
+.layercap .l2{color:var(--copper);font-weight:500}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.rules div{background:var(--paper);padding:16px 18px}
+.rules b{display:block;font-family:'Archivo',sans-serif;font-size:14.5px;font-weight:700;margin-bottom:6px}
+.rules span{font-size:14.5px;color:var(--muted)}
+
+/* tables */
+table{width:100%;border-collapse:collapse;border:1.5px solid var(--ink);font-size:14.5px}
+caption{text-align:left;font:400 12px/1.5 var(--mono);color:var(--muted);padding-bottom:10px}
+th,td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{font:500 12.5px/1.4 var(--mono);background:var(--zebra);padding:12px 14px}
+tbody th{font-weight:500;color:var(--muted);width:190px}
+td.yes{color:var(--green);font-weight:500}
+td.no{color:var(--muted)}
+tbody tr:nth-child(even){background:var(--zebra)}
+.role{font:400 12px/1.5 var(--mono)}
+.role em{display:block;color:var(--green);font-style:normal}
+
+.method{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}
+.method h3{font:500 13px/1.4 var(--mono);color:var(--muted);margin-bottom:14px}
+.method ul{list-style:none;border:1.5px solid var(--ink)}
+.method li{padding:10px 14px;border-top:1px solid var(--line);font-size:14.5px;display:flex;gap:12px;align-items:baseline}
+.method li:first-child{border-top:0}
+.method li::before{content:"";flex:none;width:9px;height:9px;background:var(--green);margin-top:0;transform:translateY(1px)}
+.method table{border-width:1px;border-color:var(--line)}
+
+/* roadmap */
+.timeline{list-style:none;border-left:2px solid var(--ink);margin-left:8px}
+.timeline li{position:relative;padding:0 0 34px 34px}
+.timeline li:last-child{padding-bottom:6px}
+.timeline li::before{
+  content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;background:var(--paper);
+  border:2px solid var(--ink);border-radius:50%;transform:translateX(-50%)
+}
+.timeline li.now::before{background:var(--green);border-color:var(--green)}
+.timeline h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;margin-bottom:6px}
+.timeline h3 .st{font:500 12px/1 var(--mono);color:var(--muted);margin-right:10px}
+.timeline p{font-size:14.5px;color:var(--muted);text-align:left;max-width:64ch;margin-bottom:8px}
+.timeline .chip{display:inline-block;font:500 11.5px/1 var(--mono);color:var(--green);background:var(--green-soft);border:1px solid var(--green);padding:5px 9px;border-radius:2px}
+.timeline .chip i{font-style:normal;color:var(--muted);margin-right:6px}
+
+/* risks */
+.risk td:first-child{font-weight:500}
+.risk td:nth-child(2){color:var(--muted)}
+
+/* safety slab */
+.slab2{background:var(--slab);color:var(--slab-ink);padding:44px 34px;margin:0 -28px}
+.slab2 h2{color:var(--paper);border-color:#3b3934}
+.slab2 h2 .no{color:var(--slab-green)}
+.slab2 ul{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.slab2 li{font:400 13px/1.65 var(--mono);color:#B8B4AA;border-top:1px solid #3b3934;padding-top:14px}
+.slab2 li code{display:block;font:700 15px/1.4 'Archivo',sans-serif;color:var(--slab-green);margin-bottom:8px;white-space:nowrap}
+
+footer{font:400 12px/1.9 var(--mono);color:var(--muted);margin-top:90px;border-top:1.5px solid var(--ink);padding-top:18px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer b{color:var(--ink);font-weight:500}
+
+.models{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1.5px solid var(--ink)}
+.models figure{background:var(--paper);margin:0}
+.models iframe{display:block;width:100%;height:300px;border:0;background:#111}
+.models figcaption{padding:10px 12px;font:400 11px/1.6 var(--mono);color:var(--muted)}
+.models figcaption b{display:block;color:var(--ink);font-weight:500;font-size:12px}
+.models figcaption a{color:var(--green);text-decoration:none}
+
+@media (max-width:900px){
+  .models{grid-template-columns:1fr}
+  header.hero{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .method{grid-template-columns:1fr}
+  .slab2 ul{grid-template-columns:1fr 1fr}
+  .ladder{grid-template-columns:none}
+  .ladder>div{grid-template-columns:100px 1fr}
+  .ladder .gate{grid-column:2}
+  tbody th{width:auto}
+}
+@media (max-width:560px){.slab2 ul{grid-template-columns:1fr}.ghost{display:none}}
+@media (prefers-reduced-motion:reduce){.plantflow{animation:none}}
+@keyframes flow{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+.plantflow{animation:flow 1.15s linear infinite}
+
+@media print{
+  body{background:#fff;font-size:12.5px}
+  main{max-width:none;padding:24px 8px}
+  section{margin-bottom:44px;break-inside:avoid}
+  header.hero{margin-bottom:44px;gap:28px}
+  .plantflow{animation:none}
+  .ghost{display:none}
+}
+</style>
+</head>
+<body>
+<span class="ghost tl">+ scale 1:1 — printed from the one-pager source on the machine</span>
+<span class="ghost br">fmt: A4 / screen — rev v0</span>
+
+<main>
+
+<header class="hero">
+  <div>
+    <p class="kicker">graduation project · mechatronics engineering — brief for the supervision meeting</p>
+    <h1>The wheel-legged<br>balancing robot</h1>
+    <p class="byline">wheels that balance, legs that change the game — one robot, three controllers, one honest experiment.</p>
+    <p class="lead">A balancing robot is an inverted pendulum: unstable at every instant, upright only because a controller reacts faster than a human can. This project builds that robot — each wheel on an <strong>adjustable leg</strong> — and uses it to answer a question bigger than the machine itself: <strong>does model-based control actually pay off on real hardware?</strong> PID, LQR and MPC run on the same robot, the same model, the same tests. Only the mathematics changes.</p>
+  </div>
+  <dl class="titleblock">
+    <div class="row"><dt>project</dt><dd class="headline">WLB-1 <b>· one-pager</b></dd></div>
+    <div class="row"><dt>candidate</dt><dd class="fill">__________________</dd></div>
+    <div class="row"><dt>advisor</dt><dd class="fill">__________________</dd></div>
+    <div class="row"><dt>phase</dt><dd>V0 — two-wheel PID baseline</dd></div>
+    <div class="row"><dt>not yet</dt><dd>legs · LiDAR · ROS 2 · BLDC</dd></div>
+    <div class="row"><dt>loop rate</dt><dd>200–500 Hz on the MCU</dd></div>
+    <div class="row"><dt>duration</dt><dd>≈ 12 months · solo</dd></div>
+  </dl>
+</header>
+
+<section>
+  <h2><span class="no">01</span> What the robot has to do</h2>
+  <p class="intro">Requirements grow in three steps, and each step is a safe fallback — the project is never more than one failed lever away from something that works.</p>
+  <div class="ladder">
+    <div><span class="lvl"><b>minimum</b>01</span><p>Balances on two wheels, drives and turns under remote control.</p><span class="gate">30 s unassisted, data logged</span></div>
+    <div><span class="lvl"><b>good</b>02</span><p>Changes leg height while balancing, recovers from pushes, stays level on uneven ground.</p><span class="gate">pitch error measured per transition</span></div>
+    <div><span class="lvl"><b>great</b>03</span><p>LQR and MPC compared on real hardware; autonomous navigation and object following via LiDAR + camera.</p><span class="gate">statistics, not single runs</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">02</span> What it looks like — community models, spun live</h2>
+  <p class="intro">My robot doesn't exist yet — the first chassis comes off the printer this phase. Until then, three community uploads from Sketchfab stand in: the first is almost exactly the V0 machine, the others show the direction it grows toward. All three are live: drag to rotate, scroll to zoom.</p>
+  <div class="models">
+    <figure>
+      <iframe title="Bbot — self-balancing ROS robot by matheus.nfranca97" src="https://sketchfab.com/models/af1e9072e976453ca8ecdd8a06ac1db3/embed?ui_theme=greyscale&ui_infos=0&ui_watermark=0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy"></iframe>
+      <figcaption><b>Bbot — balancing robot on two wheels, running ROS</b>the realistic one: nearly the V0 platform, downscaled<a href="https://sketchfab.com/3d-models/bbot-balancing-robot-af1e9072e976453ca8ecdd8a06ac1db3" target="_blank" rel="noopener">model by matheus.nfranca97 on Sketchfab</a></figcaption>
+    </figure>
+    <figure>
+      <iframe title="Two-wheeled self-balancing car by shakiller" src="https://sketchfab.com/models/12c80f148c6840ad92433948566ef5a4/embed?ui_theme=greyscale&ui_infos=0&ui_watermark=0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy"></iframe>
+      <figcaption><b>Two-wheeled self-balancing car — concept</b>the inverted pendulum, in its purest form<a href="https://sketchfab.com/3d-models/two-wheeled-self-balancing-car-of-the-future-12c80f148c6840ad92433948566ef5a4" target="_blank" rel="noopener">model by shakiller on Sketchfab</a></figcaption>
+    </figure>
+    <figure>
+      <iframe title="Wheeler Bot concept by Rishav Gupta" src="https://sketchfab.com/models/aa57108107f7441fa4e37327c76218a8/embed?ui_theme=greyscale&ui_infos=0&ui_watermark=0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy"></iframe>
+      <figcaption><b>Wheeler Bot — concept</b>the ambition: where the leg height play takes the platform<a href="https://sketchfab.com/3d-models/wheeler-bot-aa57108107f7441fa4e37327c76218a8" target="_blank" rel="noopener">model by Rishav Gupta on Sketchfab</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">03</span> System architecture</h2>
+  <p class="intro">Two layers, strictly separated. The fast layer only ever sees the state estimate; the slow layer only ever issues targets. This is the single rule the whole design protects.</p>
+  <div class="layercap">
+    <span class="l1">layer 1 — realtime balance · MCU · 200–500 Hz</span>
+    <span class="l2">layer 2 — perception · SBC · ROS 2 · added in stage 3</span>
+  </div>
+  <div class="diagram">
+    <svg viewBox="0 0 820 318" role="img" aria-label="Two-layer control architecture: MCU balance loop fed by IMU and encoders, motor driver and wheels close the loop; SBC perception layer issues velocity and height commands with a watchdog heartbeat.">
+      <defs>
+        <marker id="mi" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#1C1C1A"/></marker>
+        <marker id="mg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#1F6B47"/></marker>
+        <marker id="mc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#9A5F28"/></marker>
+      </defs>
+      <!-- nodes -->
+      <g font-family="Archivo,sans-serif" font-weight="600" font-size="13" fill="#1C1C1A" text-anchor="middle">
+        <rect x="20" y="46" width="128" height="46" rx="4" fill="#fff" stroke="#1C1C1A" stroke-width="1.5"/><text x="84" y="66">IMU + encoders</text>
+        <rect x="188" y="46" width="128" height="46" rx="4" fill="#fff" stroke="#1C1C1A" stroke-width="1.5"/><text x="252" y="66">State estimator</text>
+        <rect x="356" y="46" width="148" height="46" rx="4" fill="#fff" stroke="#1C1C1A" stroke-width="1.5"/><text x="430" y="66">Balance controller</text>
+        <rect x="544" y="46" width="118" height="46" rx="4" fill="#fff" stroke="#1C1C1A" stroke-width="1.5"/><text x="603" y="66">Motor driver</text>
+        <rect x="702" y="46" width="98" height="46" rx="4" fill="#fff" stroke="#1C1C1A" stroke-width="1.5"/><text x="751" y="66">N20 × 2</text>
+      </g>
+      <g font-family="'IBM Plex Mono',monospace" font-size="10" fill="#6B6B64" text-anchor="middle">
+        <text x="84" y="80">mpu6050*</text><text x="252" y="80">pitch, rate, speed</text><text x="430" y="80">PID → LQR → MPC</text><text x="603" y="80">DRV8833</text><text x="751" y="80">geared, encoder</text>
+      </g>
+      <!-- loop arrows -->
+      <g stroke="#1C1C1A" stroke-width="1.5" fill="none" marker-end="url(#mi)">
+        <line x1="148" y1="69" x2="187" y2="69"/><line x1="316" y1="69" x2="355" y2="69"/><line x1="504" y1="69" x2="543" y2="69"/><line x1="662" y1="69" x2="701" y2="69"/>
+      </g>
+      <g font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#6B6B64" text-anchor="middle">
+        <text x="168" y="38">θ, θ̇</text><text x="336" y="38">state x̂</text><text x="524" y="38">u (torque)</text><text x="682" y="38">PWM</text>
+      </g>
+      <!-- plant return path -->
+      <path class="plant" d="M751,92 V120 H84 V93" fill="none" stroke="#1F6B47" stroke-width="1.6" marker-end="url(#mg)"/>
+      <path class="plantflow" d="M751,92 V120 H84 V93" fill="none" stroke="#1F6B47" stroke-width="2.4" stroke-dasharray="4 16" opacity=".85"/>
+      <text x="417" y="134" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#1F6B47" text-anchor="middle">the machine itself — body tilts, wheels push it back · this loop closes every 2–5 ms</text>
+      <!-- perception layer -->
+      <rect x="20" y="170" width="700" height="128" rx="6" fill="none" stroke="#9A5F28" stroke-width="1.5" stroke-dasharray="7 6"/>
+      <text x="38" y="194" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#9A5F28">Layer 2 · perception on an SBC running ROS 2 · added only after V0 balances on its own</text>
+      <g font-family="Archivo,sans-serif" font-weight="600" font-size="12.5" fill="#1C1C1A" text-anchor="middle">
+        <rect x="40" y="210" width="160" height="40" rx="4" fill="#fff" stroke="#9A5F28" stroke-width="1.3"/><text x="120" y="229">2D LiDAR + camera</text>
+        <rect x="240" y="210" width="188" height="40" rx="4" fill="#fff" stroke="#9A5F28" stroke-width="1.3"/><text x="334" y="229">SLAM + object detection</text>
+        <rect x="470" y="210" width="132" height="40" rx="4" fill="#fff" stroke="#9A5F28" stroke-width="1.3"/><text x="536" y="229">nav + targets</text>
+      </g>
+      <g font-family="'IBM Plex Mono',monospace" font-size="10" fill="#6B6B64" text-anchor="middle">
+        <text x="120" y="243">10–30 Hz</text><text x="334" y="243">ROS 2</text><text x="536" y="243">maps, follows</text>
+      </g>
+      <g stroke="#9A5F28" stroke-width="1.3" fill="none" marker-end="url(#mc)">
+        <line x1="200" y1="230" x2="239" y2="230"/><line x1="428" y1="230" x2="469" y2="230"/>
+      </g>
+      <!-- command wire with hop over the plant line -->
+      <path d="M536,210 V140 H430 V128 A8,8 0 0 1 430,112 V93" fill="none" stroke="#9A5F28" stroke-width="1.5" stroke-dasharray="5 5" marker-end="url(#mc)"/>
+      <text x="548" y="160" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#9A5F28">v · h targets · 10–50 Hz</text>
+    </svg>
+  </div>
+  <div class="diagramfoot">
+    <span>*model confirmed during V0 bring-up — pins in config.</span>
+    <span>if layer 2 dies, layer 1 keeps balancing or shuts down safely</span>
+  </div>
+  <div class="rules">
+    <div><b>No perception in the balance path</b><span>SLAM, vision and navigation can crash, lag or vanish — the loop never notices.</span></div>
+    <div><b>The MCU has the final word</b><span>every command from above is validated and clamped against hard limits.</span></div>
+    <div><b>Heartbeat or nothing</b><span>60 ms without the computer's heartbeat and the motors are cut — no questions.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">04</span> Three controllers, one robot</h2>
+  <table>
+    <caption>the comparison matrix — this row of pages is the thesis in miniature</caption>
+    <thead><tr><th></th><th>PID</th><th>LQR</th><th>MPC</th></tr></thead>
+    <tbody>
+      <tr><th>Structure</th><td>stacked angle / speed / yaw loops</td><td>one control law u = −Kx</td><td>receding-horizon optimisation</td></tr>
+      <tr><th>Uses a model</th><td class="no">no</td><td class="yes">yes — same A, B for all</td><td class="yes">yes — same A, B</td></tr>
+      <tr><th>All states together</th><td class="no">loops fight each other</td><td class="yes">yes, by construction</td><td class="yes">yes, with a plan</td></tr>
+      <tr><th>Knows torque limits</th><td class="no">no</td><td class="no">no</td><td class="yes">yes — constraints are explicit</td></tr>
+      <tr><th>Compute per cycle</th><td class="yes">very low</td><td class="yes">very low — one mat-vec</td><td class="no">highest — a QP every cycle</td></tr>
+      <tr><th>Role</th><td><span class="role">learning step<em>baseline</em></span></td><td><span class="role">main controller<em>gain-scheduled on leg height</em></span></td><td><span class="role">advanced controller<em>where limits bite: pushes, steps, saturation</em></span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="no">05</span> How the comparison stays honest</h2>
+  <p class="intro">A comparison is only worth a thesis if the rules are fixed before the first run. These are the rules.</p>
+  <div class="method">
+    <div>
+      <h3>Fairness rules</h3>
+      <ul>
+        <li>Same robot, same sensors, same battery, same motor driver.</li>
+        <li>Same model — identical A and B matrices.</li>
+        <li>Same state estimation for all three.</li>
+        <li>Same Q and R weights at first; only the solver differs.</li>
+        <li>Same control rate, or the difference is documented.</li>
+        <li>Same tuning effort: equal sessions, separate tuning / eval sets.</li>
+        <li>Every final parameter written down before evaluation.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>The evidence</h3>
+      <table>
+        <thead><tr><th>Experiment</th><th>Metrics</th></tr></thead>
+        <tbody>
+          <tr><th>Push recovery</th><td>largest survived disturbance · settling time · peak pitch</td></tr>
+          <tr><th>Speed step</th><td>rise time · overshoot · steady-state error</td></tr>
+          <tr><th>Torque saturation</th><td>stability, recovery at the limit</td></tr>
+          <tr><th>Leg-height change</th><td>pitch error during transition</td></tr>
+          <tr><th>Robustness</th><td>added mass, sensor noise, added delay</td></tr>
+          <tr><th>Compute + energy</th><td>ms per cycle · mAh per task</td></tr>
+        </tbody>
+      </table>
+      <p style="font:400 12px/1.7 var(--mono);color:var(--muted);padding-top:14px">every experiment: ≥ 10 repetitions · mean ± std · raw logs kept — no single-run claims anywhere in the thesis</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">06</span> Roadmap — nothing advances past its gate</h2>
+  <ol class="timeline">
+    <li class="now">
+      <h3><span class="st">now</span>V0 — PID baseline, two wheels</h3>
+      <p>Small frame, ESP32, N20 motors + DRV8833, MPU-class IMU. Complementary filter, estimator, safety module, telemetry from day one. MATLAB cart-pole tuned before touching hardware.</p>
+      <span class="chip"><i>gate</i>30 s unassisted balance, run 10× and logged</span>
+    </li>
+    <li>
+      <h3><span class="st">stage 1</span>LQR on the same frame</h3>
+      <p>State-space model from real parameters, gains from Q and R. Gain scheduling for leg height arrives with stage 2.</p>
+      <span class="chip"><i>gate</i>beats or matches PID on identical tests</span>
+    </li>
+    <li>
+      <h3><span class="st">stage 2</span>MPC with explicit constraints</h3>
+      <p>Horizon, limits, QP solver. Given engineering priority over scope creep: the MCU was chosen with QP-in-5-ms in mind.</p>
+      <span class="chip"><i>gate</i>solver fits the cycle, headlessly measured in sim first</span>
+    </li>
+    <li>
+      <h3><span class="st">stage 3</span>Legs + perception</h3>
+      <p>Height-only legs first, gain-scheduled per height. Then SBC, LiDAR, camera: obstacle avoidance, mapping, following. Legs never use uncontrollable hobby servos.</p>
+      <span class="chip"><i>gate</i>balance layer untouched — perception is a bolt-on</span>
+    </li>
+    <li>
+      <h3><span class="st">stage 4</span>Thesis</h3>
+      <p>Model, derivation, three controllers, tables like the one above, an honest analysis — written in parallel from V0, not at the end.</p>
+      <span class="chip"><i>gate</i>a valid comparison — even if MPC does not win</span>
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="no">07</span> Risks and their counters</h2>
+  <table class="risk">
+    <thead><tr><th style="width:30%">Risk</th><th>Counter-measure</th></tr></thead>
+    <tbody>
+      <tr><td>A controller sets hardware on fire</td><td>simulation before hardware · tether for every first run · hard limits live in the MCU, not in trust.</td></tr>
+      <tr><td>MPC too slow on the MCU</td><td>MCU picked now for QP speed · solver timing measured in simulation early · STM32 upgrade path.</td></tr>
+      <tr><td>Model mismatch</td><td>mass, CoM, inertia and radius measured — then re-identified from logged data.</td></tr>
+      <tr><td>Leg motors over budget</td><td>height-only leg is the designed fallback, not a defeat.</td></tr>
+      <tr><td>Perception steals the semester</td><td>scope rule: perception is cut first, the control comparison never is.</td></tr>
+      <tr><td>Unfair comparison</td><td>identical tuning budget, identical experiments, everything recorded.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="slab2">
+  <h2><span class="no">08</span> Non-negotiable safety</h2>
+  <ul>
+    <li><code>|θ| > 30°</code>motors cut immediately — the robot may fall, the lab may keep its fingers.</li>
+    <li><code>no heartbeat</code>SBC silent for one watchdog window → motional arrest, safe state.</li>
+    <li><code>big red switch</code>e-stop always in reach; fuse on the motor rail, always.</li>
+    <li><code>tethered launches</code>every new controller, better or worse, runs first on the leash.</li>
+  </ul>
+</section>
+
+<footer>
+  <p><b>Basis of this page</b> — the full 16-section project documentation: objectives, requirements ladder, architecture, modeling, controller theory, comparison methodology, ML roles, risk register.</p>
+  <p>reviewed at the meeting of ________ · v0 · this is a summary, the document is the authority</p>
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Al-Balqa' Applied University — Wheel-Legged Balancing Robot project summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFFFF; --ink:#111111; --red:#E10600;
+  --grey:#767676; --hair:#111111; --zebra:#F4F4F4;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Archivo',Helvetica,Arial,sans-serif;
+  font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+main{max-width:1160px;margin:0 auto;padding:56px 32px 80px}
+p{max-width:74ch}
+a{color:var(--red);text-decoration:none;border-bottom:1px solid var(--red)}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.ghost{position:fixed;font:500 11px/1 'Archivo';letter-spacing:.06em;color:var(--grey);text-transform:uppercase}
+.ghost.tl{top:14px;left:16px}
+.ghost.br{bottom:14px;right:16px}
+
+.brand{border:3px solid var(--ink);margin-bottom:26px;background:#fff}
+.brand .art{display:flex;align-items:center;justify-content:center;padding:14px;border-bottom:3px solid var(--ink);background:#fff}
+.brand img{display:block;max-width:100%;max-height:190px;width:auto;height:auto}
+.brand .bn{
+  display:block;padding:13px 14px;font-weight:900;font-size:15.5px;line-height:1.15;
+  text-transform:uppercase;letter-spacing:-.015em;color:var(--ink);
+}
+.brand .bn small{
+  display:block;margin-top:5px;font-weight:600;font-size:10.5px;
+  letter-spacing:.09em;color:var(--grey);
+}
+
+header.hero{display:grid;grid-template-columns:1fr 300px;gap:56px;align-items:start;margin-bottom:88px}
+.kicker{font-size:13px;font-weight:600;color:var(--red);margin-bottom:28px;letter-spacing:.02em}
+h1{
+  font-weight:900;font-size:clamp(52px,9vw,108px);line-height:.86;
+  letter-spacing:-.045em;text-transform:uppercase;
+}
+.byline{font-size:15px;font-weight:500;color:var(--grey);margin:22px 0 28px;padding-top:14px;border-top:3px solid var(--ink)}
+.lead{font-size:20px;line-height:1.5;font-weight:400;max-width:34ch}
+.lead strong{font-weight:800;color:var(--red)}
+
+.titleblock{border-top:3px solid var(--ink);font-size:13px}
+.titleblock .row{display:grid;grid-template-columns:88px 1fr;border-bottom:1px solid var(--hair)}
+.titleblock dt{padding:9px 10px 9px 0;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:11px;color:var(--grey)}
+.titleblock dd{padding:9px 0;font-weight:500}
+.titleblock .fill{color:#BBB}
+.headline{background:var(--ink);color:#fff;padding:9px 10px;font-weight:700}
+.headline b{color:var(--red);font-weight:700}
+
+section{margin-bottom:84px}
+h2{
+  display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:start;
+  border-top:3px solid var(--ink);padding-top:12px;margin-bottom:26px;
+  font-weight:900;font-size:clamp(26px,3.4vw,40px);line-height:1.05;
+  letter-spacing:-.03em;text-transform:uppercase;
+}
+h2 .no{font-size:clamp(34px,5vw,58px);line-height:.85;color:var(--red);letter-spacing:-.05em}
+h2+*{grid-column:1/-1}
+section>p.intro{margin-bottom:24px;max-width:74ch}
+section>p{grid-column:2}
+
+.oneliner{
+  border:3px solid var(--ink);border-left:14px solid var(--red);
+  padding:26px 30px;font-size:clamp(19px,2.3vw,25px);font-weight:700;line-height:1.35;
+  max-width:60ch;margin-bottom:26px;
+}
+
+.model{border:3px solid var(--ink)}
+.model iframe{display:block;width:100%;height:420px;border:0;background:#111}
+.modelfoot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 14px;font-size:12px;border-top:3px solid var(--ink)}
+.modelfoot b{display:block;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink)}
+.modelfoot span{color:var(--grey)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:34px;align-items:start}
+.cols h3{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-bottom:10px}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px;border-top:3px solid var(--ink)}
+caption{text-align:left;font-size:12px;color:var(--grey);padding-bottom:10px;letter-spacing:.03em}
+th,td{padding:11px 14px 11px 0;border-bottom:1px solid var(--hair);vertical-align:top;text-align:left}
+thead th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:10px 14px 10px 0;border-bottom:3px solid var(--ink)}
+thead th+th{padding-left:14px;border-left:1px solid var(--hair)}
+tbody th{font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;width:180px}
+td.yes{color:var(--red);font-weight:700}
+td.no{color:var(--grey)}
+tbody tr:hover{background:var(--zebra)}
+td+td,tbody th+td{padding-left:14px;border-left:1px solid var(--hair)}
+
+.vs{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--ink);margin-top:28px}
+.vs>div{padding:28px 26px 30px}
+.vs>div+div{border-left:3px solid var(--ink)}
+.vs h4{font-size:44px;font-weight:900;letter-spacing:-.04em;line-height:1;text-transform:uppercase}
+.vs .tag{display:block;font-size:12px;font-weight:600;color:var(--grey);margin:8px 0 20px;letter-spacing:.04em}
+.vs dl{display:grid;grid-template-columns:96px 1fr;font-size:14.5px}
+.vs dt{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--grey);padding:10px 0;border-top:1px solid var(--hair)}
+.vs dd{padding:10px 0;border-top:1px solid var(--hair)}
+.vs .foot{margin-top:20px;padding-top:14px;border-top:3px solid var(--ink);font-weight:600;font-size:14.5px}
+.vs .cheap h4{color:var(--ink)}
+.vs .rich h4{color:var(--red)}
+.after-vs{margin-top:26px;font-size:18px;max-width:64ch}
+.after-vs strong{color:var(--red);font-weight:800}
+
+.gap{list-style:none;border-top:3px solid var(--ink)}
+.gap li{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--hair);align-items:start}
+.gap .n{font-size:30px;font-weight:900;color:var(--red);line-height:.9;letter-spacing:-.04em}
+.gap b{display:block;font-size:17px;font-weight:800;text-transform:uppercase;letter-spacing:-.01em}
+.gap span{color:var(--grey);font-size:15px}
+
+.predict{background:var(--ink);color:#fff;padding:56px 44px;margin:0 -32px 84px}
+.predict h2{border-top-color:#fff;color:#fff}
+.predict h2 .no{color:var(--red)}
+.predict p{color:#D8D8D8;font-size:17px;max-width:74ch}
+.predict .quote{
+  margin-top:30px;padding-top:24px;border-top:3px solid var(--red);
+  font-weight:900;font-size:clamp(24px,3.6vw,42px);line-height:1.15;
+  letter-spacing:-.03em;text-transform:uppercase;color:#fff;max-width:24ch;
+}
+.predict .quote i{font-style:normal;color:var(--red)}
+
+.road{display:grid;grid-template-columns:repeat(5,1fr);border:3px solid var(--ink)}
+.road div{padding:18px 16px 22px}
+.road div+div{border-left:1px solid var(--hair)}
+.road .st{display:block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--grey);margin-bottom:10px}
+.road b{display:block;font-size:17px;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:8px;line-height:1.1}
+.road p{font-size:13px;color:var(--grey);line-height:1.5}
+.road .now{background:var(--red);color:#fff}
+.road .now .st,.road .now p{color:#FFD9D8}
+.road .now b{color:#fff}
+
+footer{border-top:3px solid var(--ink);padding-top:16px;margin-top:80px;display:grid;gap:10px;font-size:12.5px;color:var(--grey)}
+footer .frow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer b{color:var(--ink);font-weight:700}
+footer .fbrand{display:flex;align-items:center;gap:12px}
+footer .fbrand img{display:block;height:52px;width:auto;border:2px solid var(--ink)}
+footer .fbrand .fn{font-weight:900;font-size:13.5px;text-transform:uppercase;letter-spacing:-.01em;color:var(--ink);line-height:1.2}
+footer .fbrand .fn small{display:block;font-weight:600;font-size:10.5px;letter-spacing:.08em;color:var(--grey);margin-top:3px}
+
+@media (max-width:900px){
+  header.hero{grid-template-columns:1fr}
+  .brand{max-width:320px}
+  .cols,.vs{grid-template-columns:1fr}
+  .vs>div+div{border-left:0;border-top:3px solid var(--ink)}
+  .road{grid-template-columns:1fr 1fr}
+  h2{grid-template-columns:70px 1fr}
+  section>p{grid-column:1}
+  .predict{margin-left:0;margin-right:0}
+}
+@media (max-width:560px){
+  .road{grid-template-columns:1fr}
+  .ghost{display:none}
+  footer .frow{flex-direction:column;align-items:flex-start}
+}
+@media print{
+  body{background:#fff;font-size:12.5px}
+  main{max-width:none;padding:24px 8px}
+  section{margin-bottom:40px;break-inside:avoid}
+  .ghost{display:none}
+}
+</style>
+</head>
+<body>
+<span class="ghost tl">Al-Balqa' Applied University · summary — derived from the project documentation</span>
+<span class="ghost br">fmt: screen / A4 — rev v0</span>
+
+<main>
+
+<header class="hero">
+  <div class="hero-text">
+    <p class="kicker">Al-Balqa' Applied University · graduation project · mechatronics engineering — short summary</p>
+    <h1>Wheel-legged<br>balancing robot</h1>
+    <p class="byline">PID vs LQR vs MPC — same robot, same model, same tests.</p>
+    <p class="lead">A balancing robot is an inverted pendulum: unstable at every instant, upright only because a controller reacts faster than a human can. This project builds that robot — two wheels, an adjustable leg on each — and uses it to answer a question bigger than the machine: <strong>does model-based control actually pay off on real hardware?</strong> Three controllers run on identical hardware, an identical model and identical test protocols. <strong>Only the mathematics changes.</strong></p>
+  </div>
+  <div class="hero-side">
+    <div class="brand">
+      <span class="art"><img src="assets/bau-logo.jpg" alt="Al-Balqa' Applied University logo"></span>
+      <span class="bn">Al-Balqa' Applied University<small>graduation project · mechatronics engineering</small></span>
+    </div>
+    <dl class="titleblock">
+      <div class="row"><dt>project</dt><dd class="headline">WLB-1 <b>· summary</b></dd></div>
+      <div class="row"><dt>candidate</dt><dd class="fill">__________________</dd></div>
+      <div class="row"><dt>advisor</dt><dd class="fill">__________________</dd></div>
+      <div class="row"><dt>phase</dt><dd>V0 — two-wheel PID baseline</dd></div>
+      <div class="row"><dt>hardware</dt><dd>ESP32 · N20 + encoder · DRV8833 · MPU-class IMU</dd></div>
+      <div class="row"><dt>loop rate</dt><dd>200–500 Hz on the MCU</dd></div>
+      <div class="row"><dt>duration</dt><dd>≈ 12 months · solo</dd></div>
+    </dl>
+  </div>
+</header>
+
+<section>
+  <h2><span class="no">01</span> The idea in one sentence</h2>
+  <p class="oneliner">Change only the math, keep everything else identical — then any difference in performance belongs to the algorithm itself, not to the hardware, tuning, or test conditions. That's the scientific method applied to control.</p>
+  <p>Most control papers prove that <em>a</em> controller works. Fewer prove that one controller is <em>better than another</em>, and fewer still do it fairly — on one robot, under one protocol, with the tuning effort counted. The fairness rules are fixed before the first run, so the result is a measurement rather than a demo.</p>
+</section>
+
+<section>
+  <h2><span class="no">02</span> What the robot is</h2>
+  <p class="intro">The first chassis doesn't exist yet — it comes off the printer in V0. Until then, the reference model below stands in for the platform: two geared wheels with encoders, a body carrying the IMU, and a leg on each side that changes height while the robot balances.</p>
+  <div class="model">
+    <iframe title="Bbot — self-balancing robot by matheus.nfranca97" src="https://sketchfab.com/models/af1e9072e976453ca8ecdd8a06ac1db3/embed?ui_theme=greyscale&ui_infos=0&ui_watermark=0" allow="autoplay; fullscreen; xr-spatial-tracking" allowfullscreen loading="lazy"></iframe>
+    <div class="modelfoot">
+      <span><b>Bbot — self-balancing robot, two wheels, ROS</b>reference geometry for the V0 platform · drag to rotate, scroll to zoom</span>
+      <span>model by matheus.nfranca97 on Sketchfab · <a href="https://skfb.ly/o8QyA" target="_blank" rel="noopener">skfb.ly/o8QyA</a></span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="no">03</span> Why LQR and MPC — and why compare them</h2>
+  <p class="intro">They're siblings: both are model-based optimal controllers that minimize the same quadratic cost (same Q, R). The difference is the constraint handling.</p>
+
+  <div class="vs">
+    <div class="cheap">
+      <h4>LQR</h4>
+      <span class="tag">the cheap, classical answer</span>
+      <dl>
+        <dt>horizon</dt><dd>infinite — solved offline</dd>
+        <dt>constraints</dt><dd>ignores them</dd>
+        <dt>compute</dt><dd>one matrix multiply: u = −Kx</dd>
+      </dl>
+      <p class="foot">One gain matrix, evaluated every cycle. Nothing to solve at runtime.</p>
+    </div>
+    <div class="rich">
+      <h4>MPC</h4>
+      <span class="tag">the expensive one</span>
+      <dl>
+        <dt>horizon</dt><dd>short window — solved every cycle</dd>
+        <dt>constraints</dt><dd>torque / tilt limits built in</dd>
+        <dt>compute</dt><dd>an optimisation problem, ~500× per second</dd>
+      </dl>
+      <p class="foot">Plans ahead over a finite horizon, then executes only the first move and plans again.</p>
+    </div>
+  </div>
+
+  <p class="after-vs">So the real question is: <strong>when do constraints matter enough to justify solving an optimisation 500 times per second?</strong> This project measures where the crossover is.</p>
+</section>
+
+<section>
+  <h2><span class="no">04</span> What everyone else does — and the gap</h2>
+  <ul class="gap">
+    <li><span class="n">01</span><div><b>One controller, and stop.</b> <span>Most papers implement a single controller — usually PID or LQR — show that it balances, and make no comparison at all.</span></div></li>
+    <li><span class="n">02</span><div><b>Unfair comparisons.</b> <span>When comparisons happen they're usually different robots, or simulation-only, or unequal tuning effort. This is extremely common.</span></div></li>
+    <li><span class="n">03</span><div><b>The gap.</b> <span>Same-robot, same-conditions, real-hardware comparisons are rare — that's exactly the gap this project fills, and why the fairness rules matter.</span></div></li>
+    <li><span class="n">04</span><div><b>Same debate elsewhere.</b> <span>Automotive lane-keeping, drones, wheeled bipeds (Ascento runs LQR + whole-body control) — the comparison is always constraints + compute vs. simplicity + speed.</span></div></li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="no">05</span> Three controllers, one robot</h2>
+  <table>
+    <caption>the comparison matrix — this table is the thesis in miniature</caption>
+    <thead><tr><th></th><th>PID</th><th>LQR</th><th>MPC</th></tr></thead>
+    <tbody>
+      <tr><th>Structure</th><td>stacked angle / speed / yaw loops</td><td>one control law u = −Kx</td><td>receding-horizon optimisation</td></tr>
+      <tr><th>Uses a model</th><td class="no">no</td><td class="yes">yes — same A, B for all</td><td class="yes">yes — same A, B</td></tr>
+      <tr><th>Same Q, R cost</th><td class="no">n/a</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      <tr><th>Knows torque limits</th><td class="no">no</td><td class="no">no</td><td class="yes">yes — constraints explicit</td></tr>
+      <tr><th>Compute per cycle</th><td class="yes">very low</td><td class="yes">very low — one mat-vec</td><td class="no">highest — a QP every cycle</td></tr>
+      <tr><th>Role</th><td>baseline</td><td>main controller</td><td>where limits bite: pushes, steps, saturation</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cols">
+    <div>
+      <h3>Fairness rules</h3>
+      <table>
+        <tbody>
+          <tr><th>Hardware</th><td>same robot, sensors, battery, driver</td></tr>
+          <tr><th>Model</th><td>identical A and B matrices</td></tr>
+          <tr><th>Estimation</th><td>same state estimator for all three</td></tr>
+          <tr><th>Weights</th><td>same Q and R at first; only the solver differs</td></tr>
+          <tr><th>Tuning</th><td>equal sessions · separate tuning / eval sets</td></tr>
+          <tr><th>Evidence</th><td>≥ 10 runs per condition · mean ± std · raw logs kept</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h3>Experiments</h3>
+      <table>
+        <tbody>
+          <tr><th>Push recovery</th><td>largest survived disturbance · settling time · peak pitch</td></tr>
+          <tr><th>Speed step</th><td>rise time · overshoot · steady-state error</td></tr>
+          <tr><th>Torque saturation</th><td>stability and recovery at the limit</td></tr>
+          <tr><th>Leg-height change</th><td>pitch error during transition</td></tr>
+          <tr><th>Robustness</th><td>added mass · sensor noise · added delay</td></tr>
+          <tr><th>Compute + energy</th><td>ms per cycle · mAh per task</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="predict">
+  <h2><span class="no">06</span> The expected honest result</h2>
+  <p>LQR is enough for ordinary balancing. MPC measurably wins near torque limits, during pushes, and in leg-height changes — at the price of compute. If they perform the same, that's also a valid thesis finding: the crossover point is the result, whichever side it lands on.</p>
+  <p class="quote">"Both controllers get the same robot, the same model, and the same tests — <i>I'm measuring the price of knowing your limits.</i>"</p>
+</section>
+
+<section>
+  <h2><span class="no">07</span> Roadmap</h2>
+  <div class="road">
+    <div class="now"><span class="st">now · V0</span><b>PID baseline</b><p>Two wheels, ESP32, N20 + DRV8833, IMU. Tuned in MATLAB first. Gate: 30 s unassisted, logged 10×.</p></div>
+    <div><span class="st">stage 1</span><b>LQR</b><p>Same frame, same model, gains from Q and R. Gate: matches or beats PID on identical tests.</p></div>
+    <div><span class="st">stage 2</span><b>MPC</b><p>Horizon, limits, QP solver. Gate: solver fits the cycle, measured in sim first.</p></div>
+    <div><span class="st">stage 3</span><b>Legs + perception</b><p>Height-only legs, then SBC / LiDAR / camera. Balance layer never touched.</p></div>
+    <div><span class="st">stage 4</span><b>Thesis</b><p>Written in parallel from V0 onward. Gate: a valid comparison — even if MPC does not win.</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="frow">
+    <span class="fbrand">
+      <img src="assets/bau-logo-sm.jpg" alt="Al-Balqa' Applied University logo">
+      <span class="fn">Al-Balqa' Applied University<small>graduation project · mechatronics engineering</small></span>
+    </span>
+    <p><b>Basis of this page</b> — the full project documentation and the one-pager <span style="white-space:nowrap">project-brief.html</span>.</p>
+  </div>
+  <div class="frow">
+    <p>reviewed at the meeting of ________ · v0 · this is a summary, the document is the authority</p>
+    <p>WLB-1 · theme: Swiss grid</p>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
